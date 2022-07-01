@@ -22,5 +22,5 @@ with:
 
 ## TODO:
 
-* Add Tags
+* Add Tags -> Try V2
 * Add some Dotnet code to put messages on a message queue
