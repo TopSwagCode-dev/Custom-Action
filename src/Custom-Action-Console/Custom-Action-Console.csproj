@@ -9,4 +9,8 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Azure.Storage.Queues" Version="12.10.0" />
+    </ItemGroup>
+
 </Project>
