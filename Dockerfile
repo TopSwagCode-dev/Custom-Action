@@ -14,5 +14,6 @@ RUN dotnet publish "Custom-Action-Console.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=publish src/app/publish .
+RUN ls
 ENTRYPOINT ["dotnet", "Custom-Action-Console.dll"]
