@@ -3,9 +3,9 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Custom-Action-Console/Custom-Action-Console.csproj", "Custom-Action-Console/"]
+COPY ["src/Custom-Action-Console/Custom-Action-Console.csproj", "Custom-Action-Console/"]
 RUN dotnet restore "Custom-Action-Console/Custom-Action-Console.csproj"
-COPY . .
+COPY /src .
 WORKDIR "/src/Custom-Action-Console"
 RUN dotnet build "Custom-Action-Console.csproj" -c Release -o /app/build
 
