@@ -13,6 +13,12 @@ foreach (var s in args)
     Console.WriteLine(s);
 }
 
+// https://github.com/dotnet/samples/blob/main/github-actions/DotNet.GitHubAction/action.yml
+// https://docs.microsoft.com/en-us/dotnet/devops/create-dotnet-github-action#explore-the-app
+// GITHUB_REPOSITORY = TopSwagCode-dev/Custom-Action-Usage
+// GITHUB_SHA = da05a6db388b5d67e2a181b0582ae6b639c93bb9 <-- Commit sha. So we know what is currently released
+// GITHUB_REF_NAME = master
+
 Console.WriteLine("GetEnvironmentVariables: ");
 foreach (DictionaryEntry de in Environment.GetEnvironmentVariables())
     Console.WriteLine("  {0} = {1}", de.Key, de.Value);
