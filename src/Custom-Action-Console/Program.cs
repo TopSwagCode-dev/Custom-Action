@@ -4,13 +4,19 @@ using System.Threading.Tasks; // Namespace for Task
 using Azure.Storage.Queues; // Namespace for Queue storage types
 using Azure.Storage.Queues.Models; // Namespace for PeekedMessage
 Console.WriteLine("Hello, World!");
+Console.WriteLine("Args are:");
+Console.WriteLine(args);
+foreach (var s in args)
+{
+    Console.WriteLine(s);
+}
 
-// Console.WriteLine(args);
+return 1;
 // Team, Repository, Time, Version, Enviroment (dev,test,preprod,prod) <-- Fail on invalid values.
 
 var queueName = "custom-action-queue";
-var connectionString = "DefaultEndpointsProtocol=https;AccountName=topswagcodeserverless202;AccountKey=vdXYn2HR+xd2TQlfMrAW0V1FWfSx5rEEubejnWYylJo0l1zX7KobaTvBdr2z21fRv1hgryCzVSgN+AStS9XI0g==;EndpointSuffix=core.windows.net"; // Should be in secrets
-// vdXYn2HR+xd2TQlfMrAW0V1FWfSx5rEEubejnWYylJo0l1zX7KobaTvBdr2z21fRv1hgryCzVSgN+AStS9XI0g==
+var connectionString = "";
+
 // Instantiate a QueueClient which will be used to manipulate the queue
 QueueClient queueClient = new QueueClient(connectionString, queueName);
 
