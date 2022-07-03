@@ -1,19 +1,22 @@
-FROM mcr.microsoft.com/dotnet/runtime:6.0 AS base
-WORKDIR /app
+# Set the base image as the .NET 6.0 SDK (this includes the runtime)
+FROM mcr.microsoft.com/dotnet/sdk:6.0 as build-env
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY ["src/Custom-Action-Console/Custom-Action-Console.csproj", "Custom-Action-Console/"]
-RUN dotnet restore "Custom-Action-Console/Custom-Action-Console.csproj"
-COPY /src .
-WORKDIR "/src/Custom-Action-Console"
-RUN dotnet build "Custom-Action-Console.csproj" -c Release -o /app/build
+# Copy everything and publish the release (publish implicitly restores and builds)
+COPY . ./
+RUN dotnet publish ./Custom-Action-Console/Custom-Action-Console.csproj -c Release -o out --no-self-contained
 
-FROM build AS publish
-RUN dotnet publish "Custom-Action-Console.csproj" -c Release -o /app/publish
+# Label the container
+LABEL maintainer="Joshua Jesper Kraegpoeth Ryder <josh@topswagcode.com>"
+LABEL repository="https://github.com/TopSwagCode-dev/Custom-Action"
+LABEL homepage="https://github.com/TopSwagCode-dev/Custom-Action"
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish app/publish .
-RUN echo $(ls)
-ENTRYPOINT ["dotnet", "Custom-Action-Console.dll"]
+# Label as GitHub action
+LABEL com.github.actions.name="Github Release Metrics"
+LABEL com.github.actions.description="A Github action that publishes metrics regarding releases"
+LABEL com.github.actions.icon="sliders"
+LABEL com.github.actions.color="purple"
+
+# Relayer the .NET SDK, anew with the build output
+FROM mcr.microsoft.com/dotnet/sdk:6.0
+COPY --from=build-env /out .
+ENTRYPOINT [ "dotnet", "/Custom-Action-Console.dll" ]
