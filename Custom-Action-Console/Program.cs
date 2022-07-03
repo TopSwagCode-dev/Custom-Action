@@ -11,7 +11,7 @@ foreach (var s in args)
     Console.WriteLine(s);
 }
 
-return 1;
+return -1;
 // Team, Repository, Time, Version, Enviroment (dev,test,preprod,prod) <-- Fail on invalid values.
 
 var queueName = "custom-action-queue";
