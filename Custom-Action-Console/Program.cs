@@ -3,6 +3,8 @@ using System.Configuration; // Namespace for ConfigurationManager
 using System.Threading.Tasks; // Namespace for Task
 using Azure.Storage.Queues; // Namespace for Queue storage types
 using Azure.Storage.Queues.Models; // Namespace for PeekedMessage
+using System.Collections;
+
 Console.WriteLine("Hello, World!");
 Console.WriteLine("Args are:");
 Console.WriteLine(args);
@@ -10,6 +12,10 @@ foreach (var s in args)
 {
     Console.WriteLine(s);
 }
+
+Console.WriteLine("GetEnvironmentVariables: ");
+foreach (DictionaryEntry de in Environment.GetEnvironmentVariables())
+    Console.WriteLine("  {0} = {1}", de.Key, de.Value);
 
 return;
 // Team, Repository, Time, Version, Enviroment (dev,test,preprod,prod) <-- Fail on invalid values.
